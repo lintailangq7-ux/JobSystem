@@ -31,7 +31,7 @@ public class Login extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		RequestDispatcher dispatcher =
-		        request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
+		        request.getRequestDispatcher("/jsp/Login.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -60,7 +60,7 @@ public class Login extends HttpServlet {
             session.setAttribute("userId", userId);
             session.setAttribute("userType", userId.startsWith("Te") ? "teacher" : "student");
             
-            response.sendRedirect("Menu.jsp"); // メインメニューへ
+            response.sendRedirect("/jsp/Employment/EmploymentList.jsp"); // メインメニューへ
         } else {
             request.setAttribute("error", "ユーザーIDまたはパスワードが正しくありません。");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
