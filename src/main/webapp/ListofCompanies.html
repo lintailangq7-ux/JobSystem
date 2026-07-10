@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>企業一覧</title>
+<style>
+	.top-area{
+	    display:flex;
+	    justify-content:space-between;
+	    align-items:center;
+	    width:100%;
+	    margin-bottom:30px;
+	}
+
+	.title{
+	    display:flex;
+	    align-items:center;
+	    gap:10px;
+	}
+	.title h1{
+	    margin:0;
+	    font-size:30px;
+	    padding:10px 0;
+	    font-weight:normal;
+	}
+	.back{
+	    width:50px;
+	    height:40px;
+	}
+
+
+
+	.search-area{
+	    display: flex;
+	    justify-content: flex-end;  /* 右寄せ */
+	    margin-bottom: 20px;
+	}
+	.search-box{
+		position: relative;
+		width: 200px;
+		margin-left: 650px;
+	}
+	.search-box input{
+	    width: 100%;
+	    height: 50px;
+	    padding: 0 55px 0 20px; /* 右側はボタン分余白を空ける */
+	    border: 3px solid #5b9bd5;
+	    border-radius: 30px;
+	    font-size: 20px;
+	    outline: none;
+	}
+	.search-btn{
+	    position: absolute;
+	    top: 50%;
+	    right: -20px;
+	    transform: translateY(-50%);
+	    width: 30px;
+	    height: 30px;
+	    border: none;
+	    background: transparent;
+	    cursor: pointer;
+	    font-size: 18px;
+	    padding: 0;
+	}
+</style>
+
+</head>
+<body>
+<button>戻る</button>
+<div class="top-area"></div>
+
+<div class="title">
+<div class="back"></div>
+<h1>企業一覧</h1>
+</div>
+<div class="search-area">
+<div class="search-box">
+<input type="text" placeholder="企業名">
+<button type="button" class="search-btn" onclick="searchCompany()">🔍</button>
+</div>
+</div>
+<table border="1">
+	<thead>
+
+	<tr>
+	<th>ID</th>
+	<th>企業名</th>
+	<th>住所</th>
+	<th>TEL</th>
+	<th>メールアドレス</th>
+	<th>採用実績</th>
+	<th></th>
+	</tr>
+
+	</thead>
+
+</table>
+<button>追加</button>
+</body>
+</html>
