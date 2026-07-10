@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>学生一覧</title>
+<style>
+  body {
+    font-family: "MS PGothic", "Meiryo", sans-serif;
+    background: #ffffff;
+    padding: 20px;
+  }
+  .container {
+    max-width: 900px;
+    position: relative;
+  }
+ 
+  /* header */
+  .header-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .title-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #999;
+    width: 300px;
+    height: 60px;
+  }
+  .title-arrow {
+    width: 60px;
+    height: 100%;
+    background: #29ABE2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .title-arrow svg { width: 30px; height: 30px; }
+  .title-text {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 14px;
+  }
+ 
+  .search-box {
+    display: inline-block;
+    border: 2px solid #29abe2; /* 外側の青い丸枠 */
+    border-radius: 20px;
+    padding: 4px 8px;
+  }
+
+  .search-box input {
+    border: none;       /* 内側の枠線を消す */
+    outline: none;       /* フォーカス時の青い枠も消す */
+    background: transparent;
+    font-size: 14px;
+  }
+
+  /* table */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th {
+    background: #1f5fa8;
+    color: #fff;
+    font-size: 13px;
+    padding: 6px 4px;
+    border: 1px solid #999;
+  }
+  td {
+    border: 1px solid #999;
+    font-size: 13px;
+    padding: 6px 4px;
+    text-align: center;
+    height: 26px;
+  }
+  td.rowhead {
+    background: #29ABE2;
+    color: #003366;
+    font-weight: bold;
+  }
+  tr.empty td.rowhead {
+    background: #29ABE2;
+  }
+  .btn-more {
+    background: #999;
+    color: #fff;
+    border: none;
+    padding: 3px 10px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+ 
+  /* scroll arrow */
+  .scroll-arrow {
+    position: absolute;
+    right: -70px;
+    top: 90px;
+    width: 40px;
+    height: 400px;
+    background: #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    box-sizing: border-box;
+  }
+ 
+  .footer-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+  button.register {
+    background: #d9001b;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 30px;
+    border: none;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+	<div class="header-row">
+	  <div class="title-box">
+	    <div class="title-arrow">
+	      <svg viewBox="0 0 24 24"><polygon points="18,2 18,22 4,12" fill="#FFE600"/></svg>
+	    </div>
+	    <div class="title-text">学生情報一覧</div>
+	  </div>
+	  
+	  <div class="search-box">
+		<input type="text" id="SSbox"  placeholder="検索">
+	</div>
+	</div>
+	<script>
+		const Sdata=[
+		[1001,S1A1,1,和田毅,男,福岡,SE,P,　,　,],
+		[1001,S1A1,1,和田毅,男,福岡,SE,P,　,　,],
+		[1001,S1A1,1,和田毅,男,福岡,SE,P,　,　,],
+		[1001,S1A1,1,和田毅,男,福岡,SE,P,　,　,],
+		]
+		
+	</script>
+	<table border="1">
+		<tr>
+			<dh>学籍番号</hh>
+			<th>クラス</th>
+			<th>番号</th>
+			<th>氏名</th>
+			<th>性別</th>
+			<th>希望地域</th>
+			<th>希望業種1</th>
+			<th>希望業種2</th>
+			<th>希望業種3</th>
+			<th>備考</th>
+			<th></th>
+		</tr>
+	
+			
+	</table>
+	
+</body>
+</html>
