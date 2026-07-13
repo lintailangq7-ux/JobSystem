@@ -24,12 +24,9 @@ public class EmploymentDAO {   // 指導＋就職情報
      */
     public List<ModelEmployment> findAll() {
         List<ModelEmployment> list = new ArrayList<>();
+        EmploymentChukanDAO EmploymentChukanDAO = new EmploymentChukanDAO();
 
-        String sql = "SELECT 就職情報ID, 指導ID, 学籍番号, 企業ID, 選考状況1, 選考状況2, " +
-                     "選考状況3, 選考状況4, 選考状況5, 予定日数, 勤務地, 試験情報, " +
-                     "提出状況, 試験会場, 試験時間, 内定承諾期限, 備考 " +
-                     "FROM 就職情報 " +
-                     "ORDER BY 就職情報ID";
+        String sql = "SELECT * FROM 就職情報 ORDER BY 就職情報ID";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -41,7 +38,6 @@ public class EmploymentDAO {   // 指導＋就職情報
                 while (rs.next()) {
                 	ModelEmployment e = new ModelEmployment();
 
-                    e.setShidoId(rs.getString("就職情報ID"));
                     e.setShidoId(rs.getString("指導ID"));
                     e.setGakusekiNo(rs.getInt("学籍番号"));
                     e.setKaishaId(rs.getString("企業ID"));
@@ -51,6 +47,7 @@ public class EmploymentDAO {   // 指導＋就職情報
                     }
                     e.setNaiteiKakutei(rs.getInt("内定確定"));
                     e.setBiko(rs.getString("備考"));
+                    e.setShushokuJohoChukanList(EmploymentChukanDAO.findById(rs.getString("指導ID")));
 
                     list.add(e);
                 }

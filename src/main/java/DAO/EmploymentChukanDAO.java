@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,11 @@ public class EmploymentChukanDAO {
                 	  EmploymentChukan c = new EmploymentChukan();
 
                 	  c.setShidoId(rs.getString("指導ID"));
-                      c.setShikenNichiji(rs.getTimestamp("試験日時"));
+                      Timestamp ts = rs.getTimestamp("試験日時");
+                      if (ts != null) {
+                    	  c.setShikenNichiji(ts.toLocalDateTime());
+                      }
+
                       c.setShikenNaiyo(rs.getString("試験内容"));
                       c.setTeishutsuShoruiJokyo(rs.getInt("提出書類状況"));
                       c.setShikenKaijo(rs.getString("試験会場"));

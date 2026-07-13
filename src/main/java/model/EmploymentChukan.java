@@ -1,15 +1,17 @@
 package model;
 
+import java.time.LocalDateTime;
+
 public class EmploymentChukan {
     private String shidoId;         // 指導ID
-    private String shikenNichiji;   // 試験日時
+    private LocalDateTime shikenNichiji;   // 試験日時
     private String shikenNaiyo;     // 試験内容
     private int teishutsuShoruiJokyo; // 提出書類状況
     private String shikenKaijo;     // 試験会場
 
     public EmploymentChukan() {}
 
-    public EmploymentChukan(String shidoId, String shikenNichiji, String shikenNaiyo,
+    public EmploymentChukan(String shidoId, LocalDateTime shikenNichiji, String shikenNaiyo,
                               int teishutsuShoruiJokyo, String shikenKaijo) {
         this.shidoId = shidoId;
         this.shikenNichiji = shikenNichiji;
@@ -21,8 +23,8 @@ public class EmploymentChukan {
     public String getShidoId() { return shidoId; }
     public void setShidoId(String shidoId) { this.shidoId = shidoId; }
 
-    public String getShikenNichiji() { return shikenNichiji; }
-    public void setShikenNichiji(String shikenNichiji) { this.shikenNichiji = shikenNichiji; }
+    public LocalDateTime getShikenNichiji() { return shikenNichiji; }
+    public void setShikenNichiji(LocalDateTime shikenNichiji) { this.shikenNichiji = shikenNichiji; }
 
     public String getShikenNaiyo() { return shikenNaiyo; }
     public void setShikenNaiyo(String shikenNaiyo) { this.shikenNaiyo = shikenNaiyo; }
