@@ -60,7 +60,7 @@ public class Login extends HttpServlet {
             session.setAttribute("userId", userId);
             session.setAttribute("userType", userId.startsWith("Te") ? "teacher" : "student");
             
-            response.sendRedirect("/jsp/Employment/EmploymentList.jsp"); // メインメニューへ
+            response.sendRedirect("jsp/Employment/EmploymentList.jsp"); // メインメニューへ
         } else {
             request.setAttribute("error", "ユーザーIDまたはパスワードが正しくありません。");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
