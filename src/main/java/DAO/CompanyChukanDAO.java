@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.CompanyChukan;   // 企業モデルクラス
-import model.ModelCompany;
 
 public class CompanyChukanDAO {
 
@@ -50,5 +49,5 @@ public class CompanyChukanDAO {
     }
 }
 
-CompanyChukan c = new CompanyChukan();
+
 

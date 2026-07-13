@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import model.ModelEmployment;
 
@@ -37,22 +41,15 @@ public class EmploymentDAO {   // 指導＋就職情報
                 while (rs.next()) {
                 	ModelEmployment e = new ModelEmployment();
 
-                    e.setShushokuJohoId(rs.getInt("就職情報ID"));
-                    e.setShidoId(rs.getInt("指導ID"));
-                    e.setGakusekiBango(rs.getInt("学籍番号"));
-                    e.setKigyouId(rs.getInt("企業ID"));
-                    e.setSenkoJokyo1(rs.getString("選考状況1"));
-                    e.setSenkoJokyo2(rs.getString("選考状況2"));
-                    e.setSenkoJokyo3(rs.getString("選考状況3"));
-                    e.setSenkoJokyo4(rs.getString("選考状況4"));
-                    e.setSenkoJokyo5(rs.getString("選考状況5"));
-                    e.setYoteiNissu(rs.getDate("予定日数"));
-                    e.setKinmuChi(rs.getString("勤務地"));
-                    e.setShikenJoho(rs.getString("試験情報"));
-                    e.setTeishutsuJokyo(rs.getInt("提出状況"));
-                    e.setShikenKaijo(rs.getString("試験会場"));
-                    e.setShikenJikan(rs.getTime("試験時間"));
-                    e.setNaiteiShodakuKigen(rs.getDate("内定承諾期限"));
+                    e.setShidoId(rs.getString("就職情報ID"));
+                    e.setShidoId(rs.getString("指導ID"));
+                    e.setGakusekiNo(rs.getInt("学籍番号"));
+                    e.setKaishaId(rs.getString("企業ID"));
+                    Timestamp ts = rs.getTimestamp("内定確定日");
+                    if (ts != null) {
+                        e.setNaiteiKakuteiBi(ts.toLocalDateTime());
+                    }
+                    e.setNaiteiKakutei(rs.getInt("内定確定"));
                     e.setBiko(rs.getString("備考"));
 
                     list.add(e);

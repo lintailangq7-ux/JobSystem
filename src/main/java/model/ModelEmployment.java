@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ModelEmployment {
@@ -8,7 +9,7 @@ public class ModelEmployment {
     private String shidoId;           // 指導ID
     private int gakusekiNo;           // 学籍番号
     private String kaishaId;          // 企業ID
-    private String naiteiKakuteiBi;   // 内定確定日
+    private LocalDateTime naiteiKakuteiBi;   // 内定確定日
     private int naiteiKakutei;        // 内定確定
     private String biko;              // 備考
 
@@ -19,7 +20,7 @@ public class ModelEmployment {
 
     // コンストラクタ（必要に応じて拡張）
     public ModelEmployment(String shidoId, int gakusekiNo, String kaishaId,
-                           String naiteiKakuteiBi, int naiteiKakutei, String biko,
+    		LocalDateTime naiteiKakuteiBi, int naiteiKakutei, String biko,
                            List<ShushokuJohoChukan> shushokuJohoChukanList) {
         this.shidoId = shidoId;
         this.gakusekiNo = gakusekiNo;
@@ -40,8 +41,8 @@ public class ModelEmployment {
     public String getKaishaId() { return kaishaId; }
     public void setKaishaId(String kaishaId) { this.kaishaId = kaishaId; }
 
-    public String getNaiteiKakuteiBi() { return naiteiKakuteiBi; }
-    public void setNaiteiKakuteiBi(String naiteiKakuteiBi) { this.naiteiKakuteiBi = naiteiKakuteiBi; }
+    public LocalDateTime getNaiteiKakuteiBi() { return naiteiKakuteiBi; }
+    public void setNaiteiKakuteiBi(LocalDateTime naiteiKakuteiBi) { this.naiteiKakuteiBi = naiteiKakuteiBi; }
 
     public int getNaiteiKakutei() { return naiteiKakutei; }
     public void setNaiteiKakutei(int naiteiKakutei) { this.naiteiKakutei = naiteiKakutei; }

@@ -1,15 +1,15 @@
 package model;
 
-public class ShushokuJohoChukan {
+public class EmploymentChukan {
     private String shidoId;         // 指導ID
     private String shikenNichiji;   // 試験日時
     private String shikenNaiyo;     // 試験内容
     private int teishutsuShoruiJokyo; // 提出書類状況
     private String shikenKaijo;     // 試験会場
 
-    public ShushokuJohoChukan() {}
+    public EmploymentChukan() {}
 
-    public ShushokuJohoChukan(String shidoId, String shikenNichiji, String shikenNaiyo,
+    public EmploymentChukan(String shidoId, String shikenNichiji, String shikenNaiyo,
                               int teishutsuShoruiJokyo, String shikenKaijo) {
         this.shidoId = shidoId;
         this.shikenNichiji = shikenNichiji;
