@@ -1,5 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"
+         import="java.util.List, model.*" %>
 <!DOCTYPE html>
+
+<%
+// セッションから学生リストを受け取る
+OllData OllData = (OllData) session.getAttribute("Olldata");
+%>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -32,8 +39,8 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="id-cell">ID01</td>
-                                <td>KCSシステムズ</td>
+                                <td class="id-cell"><%= OllData.getEmployment().get(1).getShidoId()  %></td>
+                                <td<%= OllData.getCompany().get(1).getKaishaName()  %></td>
                                 <td>6/3　企業説明会</td>
                                 <td>SE・PG</td>
                                 <td></td>

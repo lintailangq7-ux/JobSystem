@@ -22,7 +22,7 @@ public class CompanyDAO {
         List<ModelCompany> list = new ArrayList<>();
         CompanyChukanDAO CompanyChukanDAO = new CompanyChukanDAO();
         String sql = "SELECT * " +
-                     "FROM 企業 " +
+                     "FROM 企業テーブル " +
                      "ORDER BY 企業ID";
 
         try {
@@ -36,7 +36,7 @@ public class CompanyDAO {
                 	ModelCompany c = new ModelCompany();
 
                     c.setKaishaId(rs.getString("企業ID"));
-                    c.setKaishaName(rs.getString("会社名"));
+                    c.setKaishaName(rs.getString("企業名"));
                     c.setAddress(rs.getString("住所"));
                     c.setTel(rs.getString("電話番号"));
                     c.setEmail(rs.getString("メールアドレス"));

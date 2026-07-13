@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import DAO.OlldataDAO;
+import model.OllData;
 /**
  * Servlet implementation class Login
  */
@@ -47,6 +48,9 @@ public class Login extends HttpServlet {
         String password = request.getParameter("password");
         
         OlldataDAO aDAO = new OlldataDAO();
+        OllData ad = aDAO.findAll();
+        HttpSession session = request.getSession();
+        session.setAttribute("Olldata",ad);
         
         // TODO: 本来はDB照合処理を書く
         // 仮の認証（後で本物に置き換えてください）
@@ -60,11 +64,11 @@ public class Login extends HttpServlet {
         }
 
         if (isValid) {
-            HttpSession session = request.getSession(true);
+
             session.setAttribute("userId", userId);
             session.setAttribute("userType", userId.startsWith("Te") ? "teacher" : "student");
             
-            response.sendRedirect("jsp/Employment/EmploymentList.jsp"); // メインメニューへ
+            response.sendRedirect("jsp/Employment/TecherEmplymentList.jsp"); // メインメニューへ
         } else {
             request.setAttribute("error", "ユーザーIDまたはパスワードが正しくありません。");
             request.getRequestDispatcher("Login.jsp").forward(request, response);

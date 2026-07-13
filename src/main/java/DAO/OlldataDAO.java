@@ -24,7 +24,7 @@ public class OlldataDAO {
      * 指導IDを指定して、指導情報・企業情報・学生情報をまとめて取得する。
      * 指導情報が見つからない場合は null を返す。
      */
-    public OllData findAll(String shidoId) {
+    public OllData findAll() {
     	List<ModelEmployment> employment = EmploymentDAO.findAll();
         if (employment == null) {
             return null;

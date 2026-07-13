@@ -21,7 +21,7 @@ public class StudentDAO {
             List<ModelStudent> list = new ArrayList<>();
             StudentChukanDAO studentChukanDAO = new StudentChukanDAO();
 
-            String sql = "SELECT * FROM 学生 ORDER BY 学籍番号";
+            String sql = "SELECT * FROM 学生テーブル ORDER BY 学籍番号";
 
             try (Connection con = DriverManager.getConnection(URL, USER, PASS);
                  PreparedStatement ps = con.prepareStatement(sql);
@@ -37,7 +37,7 @@ public class StudentDAO {
                     s.setName(rs.getString("氏名"));
                     s.setAttendanceNo(rs.getInt("出席番号"));
                     s.setZaisekiJokyo(rs.getInt("在籍状況"));
-                    s.setKenNaiGaiKibo(rs.getString("県内外希望"));
+                    s.setKenNaiGaiKibo(rs.getString("県内外の希望"));
                     s.setSeibetsu(rs.getString("性別"));
                     s.setBiko(rs.getString("備考"));
 
@@ -52,62 +52,46 @@ public class StudentDAO {
             return list;
         }
     
-    /**
-     * 学生情報と企業情報を企業IDで紐づけて取得（就職活動中の学生向け）
-     * @return 学生＋企業情報のリスト
-     */
-    public List<ModelStudent> findAllWithCompany(int kigyouId) {
-        List<ModelStudent> list = new ArrayList<>();
+        public StudentSummaryDTO findSummaryByGakusekiNo(int gakusekiNo) {
+            String sql =
+                "SELECT s.氏名, s.クラス, s.出席番号, s.性別, s.県内外希望, s.備考, " +
+                "       GROUP_CONCAT(DISTINCT sc.希望職種 SEPARATOR '・') AS kibo_shokushu, " +
+                "       EXISTS( " +
+                "           SELECT 1 FROM 就職情報 j " +
+                "           WHERE j.学籍番号 = s.学籍番号 AND j.内定確定 = 1 " +
+                "       ) AS naitei " +
+                "FROM 学生 s " +
+                "LEFT JOIN 学生中間 sc ON s.学籍番号 = sc.学籍番号 " +
+                "WHERE s.学籍番号 = ? " +
+                "GROUP BY s.学籍番号";
 
-        String sql = """
-                SELECT s.*
-                FROM 就職情報 j
-                INNER JOIN 学生 s ON j.学籍番号 = s.学籍番号
-                WHERE j.企業ID = ?
-                ORDER BY s.学籍番号 ASC
-            """;
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            StudentSummaryDTO dto = null;
 
             try (Connection con = DriverManager.getConnection(URL, USER, PASS);
-                    PreparedStatement ps = con.prepareStatement(sql)) {   // ← ここまででps作成
+                 PreparedStatement ps = con.prepareStatement(sql)) {
 
-                   ps.setInt(1, kigyouId);   
+                ps.setInt(1, gakusekiNo);
 
-                   try (ResultSet rs = ps.executeQuery()) {
-
-                       while (rs.next()) {
-                    ModelStudent s = new ModelStudent();
-
-                    // 学生情報
-                    s.setGakusekiBango(rs.getInt("学籍番号"));
-                    s.setKurasu(rs.getString("クラス"));
-                    s.setShussekiBango(rs.getInt("出席番号"));
-                    s.setShimei(rs.getString("氏名"));
-                    s.setZaisekiJokyo(rs.getInt("在籍状況"));
-                    s.setDai1KibouShokushu(rs.getString("第1希望職種"));
-                    s.setDai2KibouShokushu(rs.getString("第2希望職種"));
-                    s.setDai3KibouShokushu(rs.getString("第3希望職種"));
-                    s.setKenNaiGaiKibou(rs.getString("県内外の希望"));
-                    s.setSeibetsu(rs.getString("性別"));
-                    s.setBiko(rs.getString("備考"));
-
-                    // 企業情報（Studentクラスに企業情報を入れる場合）
-                    // ※企業情報は別フィールドとして持つか、必要に応じて拡張してください
-                    // 例: s.setKaishaMei(rs.getString("会社名"));
-                    //     s.setKigyouId(rs.getInt("企業ID"));
-
-                    list.add(s);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        dto = new StudentSummaryDTO();
+                        dto.setName(rs.getString("氏名"));
+                        dto.setClassName(rs.getString("クラス"));
+                        dto.setAttendanceNo(rs.getInt("出席番号"));
+                        dto.setSeibetsu(rs.getString("性別"));
+                        dto.setKiboChiiki(rs.getString("県内外希望"));
+                        dto.setBiko(rs.getString("備考"));
+                        dto.setKiboShokushu(rs.getString("kibo_shokushu"));
+                        dto.setNaitei(rs.getBoolean("naitei"));
+                    }
                 }
-              }
-           }
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("学生＋企業情報取得エラー: " + e.getMessage());
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("生徒サマリー取得エラー: " + e.getMessage());
+            }
+            return dto;
         }
-        return list;
-    }
+   
    
     
 }
