@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /**
  * 企業情報・指導情報・学生情報をまとめて保持するデータクラス。
  *
@@ -10,24 +12,27 @@ package model;
  */
 public class OllData {
 
-    private ModelCompany company;       // 企業情報
-    private ModelEmployment employment; // 指導情報（就職情報）
-    private ModelStudent student;       // 学生情報
+    private List<ModelCompany> company;       // 企業情報
+    private List<ModelEmployment> employment; // 指導情報（就職情報）
+    private List<ModelStudent> student;       // 学生情報
 
     public OllData() {}
 
-    public OllData(ModelCompany company, ModelEmployment employment, ModelStudent student) {
+    public OllData(List<ModelCompany> company, List<ModelEmployment> employment, List<ModelStudent> student) {
         this.company = company;
         this.employment = employment;
         this.student = student;
     }
 
-    public ModelCompany getCompany() { return company; }
-    public void setCompany(ModelCompany company) { this.company = company; }
+    public List<ModelCompany> getCompany() { return company; }
+    public void setCompany(List<ModelCompany> company) { this.company = company; }
 
-    public ModelEmployment getEmployment() { return employment; }
-    public void setEmployment(ModelEmployment employment) { this.employment = employment; }
+    public List<ModelEmployment> getEmployment() { return employment; }
+    public void setEmployment(List<ModelEmployment> employment) { this.employment = employment; }
 
-    public ModelStudent getStudent() { return student; }
-    public void setStudent(ModelStudent student) { this.student = student; }
+    public List<ModelStudent> getStudent() { return student; }
+    public void setStudent(List<ModelStudent> student) { this.student = student; }
 }
+
+
+

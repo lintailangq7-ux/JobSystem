@@ -15,53 +15,42 @@ public class StudentDAO {
     private static final String USER = "root";
     private static final String PASS = "kcsf";
 
-    /**
-     * 学生テーブルから全件を取得する
-     * @return 学生情報のリスト
-     */
-    public List<ModelStudent> findAll() {
-        List<ModelStudent> list = new ArrayList<>();
-        
-        // ER図に基づいた全カラムを選択
-        String sql = "SELECT 学籍番号, クラス, 出席番号, 氏名, 在籍状況, " +
-                     "第1希望職種, 第2希望職種, 第3希望職種, " +
-                     "県内外の希望, 性別, 備考 " +
-                     "FROM 学生 " +
-                     "ORDER BY 学籍番号";
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            
+        public List<ModelStudent> findAll() {
+
+            List<ModelStudent> list = new ArrayList<>();
+            StudentChukanDAO studentChukanDAO = new StudentChukanDAO();
+
+            String sql = "SELECT * FROM 学生 ORDER BY 学籍番号";
+
             try (Connection con = DriverManager.getConnection(URL, USER, PASS);
                  PreparedStatement ps = con.prepareStatement(sql);
                  ResultSet rs = ps.executeQuery()) {
 
                 while (rs.next()) {
-                	ModelStudent s = new ModelStudent();
-                    
-                    // 全カラムのマッピング
-                    s.setGakusekiBango(rs.getInt("学籍番号"));           // 学籍番号
-                    s.setKurasu(rs.getString("クラス"));                 // クラス
-                    s.setShussekiBango(rs.getInt("出席番号"));           // 出席番号
-                    s.setShimei(rs.getString("氏名"));                   // 氏名
-                    s.setZaisekiJokyo(rs.getInt("在籍状況"));            // 在籍状況
-                    s.setDai1KibouShokushu(rs.getString("第1希望職種")); // 第1希望職種
-                    s.setDai2KibouShokushu(rs.getString("第2希望職種")); // 第2希望職種
-                    s.setDai3KibouShokushu(rs.getString("第3希望職種")); // 第3希望職種
-                    s.setKenNaiGaiKibou(rs.getString("県内外の希望"));   // 県内外の希望
-                    s.setSeibetsu(rs.getString("性別"));                 // 性別
-                    s.setBiko(rs.getString("備考"));                     // 備考
-                    
+                    ModelStudent s = new ModelStudent();
+
+                    int gakusekiNo = rs.getInt("学籍番号");
+
+                    s.setGakusekiNo(gakusekiNo);
+                    s.setClassName(rs.getString("クラス"));
+                    s.setName(rs.getString("氏名"));
+                    s.setAttendanceNo(rs.getInt("出席番号"));
+                    s.setZaisekiJokyo(rs.getInt("在籍状況"));
+                    s.setKenNaiGaiKibo(rs.getString("県内外希望"));
+                    s.setSeibetsu(rs.getString("性別"));
+                    s.setBiko(rs.getString("備考"));
+
+                    s.setGakuseiChukanList(studentChukanDAO.findById(gakusekiNo));
+
                     list.add(s);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("学生情報取得エラー: " + e.getMessage());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("DB接続エラー: " + e.getMessage());
+            return list;
         }
-        
-        return list;
-    }
     
     /**
      * 学生情報と企業情報を企業IDで紐づけて取得（就職活動中の学生向け）
@@ -119,6 +108,10 @@ public class StudentDAO {
         }
         return list;
     }
+   
+    
 }
+
+
 
 

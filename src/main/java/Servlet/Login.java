@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
+import DAO.OlldataDAO;
 /**
  * Servlet implementation class Login
  */
@@ -44,6 +46,7 @@ public class Login extends HttpServlet {
         String userId = request.getParameter("userId");
         String password = request.getParameter("password");
         
+        OlldataDAO aDAO = new OlldataDAO();
         
         // TODO: 本来はDB照合処理を書く
         // 仮の認証（後で本物に置き換えてください）
