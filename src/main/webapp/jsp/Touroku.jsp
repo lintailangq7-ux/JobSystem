@@ -237,6 +237,7 @@ textarea{
 <select name="schoolStatus">
     <option>在籍</option>
     <option>卒業</option>
+    <option>休学</option>
     <option>退学</option>
 </select>
 
