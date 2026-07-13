@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>指導一覧 - Job Hunting Management System</title>
+    <title>指導一覧</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/Employment.css"> <!-- CSSファイルの読み込み -->
     <style>
@@ -14,48 +14,6 @@
 </head>
 <body>
     <div class="main-container">
-        <!-- 左側：生徒情報 -->
-        <div class="student-info">
-            <div class="title-box">指導一覧</div>
-            
-            <table class="student-table">
-                <tr>
-                    <td class="header">名前</td>
-                    <td>山田太郎</td>
-                </tr>
-                <tr>
-                    <td class="header">クラス</td>
-                    <td>S3A1</td>
-                </tr>
-                <tr>
-                    <td class="header">番号</td>
-                    <td class="number">32</td>
-                </tr>
-                <tr>
-                    <td class="header">性別</td>
-                    <td>男</td>
-                </tr>
-            </table>
-
-            <br>
-
-            <table class="student-table">
-                <tr>
-                    <td class="header">志望業種</td>
-                    <td>SE・PG</td>
-                </tr>
-                <tr>
-                    <td class="header">志望地域</td>
-                    <td>福岡・関東</td>
-                </tr>
-                <tr>
-                    <td class="header">内定状況</td>
-                    <td>未</td>
-                </tr>
-            </table>
-
-            <div class="remarks-box">備考</div>
-        </div>
 
         <!-- 右側：指導一覧 -->
         <div class="guidance-area">
@@ -67,7 +25,7 @@
                                 <th>指導ID</th>
                                 <th>企業名</th>
                                 <th>選考状況</th>
-                                <th>業種</th>
+                                <th>選考状況</th>
                                 <th>備考</th>
                                 <th class="action-col"></th>
                             </tr>
@@ -196,8 +154,9 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-
+            </div>	
+            <button class="btn-add">学生一覧</button>
+			<button class="btn-add">活動報告書</button>
             <button class="btn-add">追加</button>
         </div>
     </div>
