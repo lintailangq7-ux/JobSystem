@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    <%@ page import="model.ModelStudent,java.util.List" %>
+<%
+ 	ModelStudent Sdata = (ModelStudent)session.getAttribute("Sdata");
+	List<ModelStudent> StuList = (List<ModelStudent>)request.getAttribute("StuList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -236,7 +240,7 @@
     color: #fff;
     font-weight: bold;
   }
-  
+
 </style>
 </head>
 <body>
@@ -275,246 +279,25 @@
 			<th>備考</th>
 			<th>　</th>
 		</tr>
-		<tr data-id="1001">
-			<td class="rowhead">1001</td>
-			<td>S3A1</td>
-			<td>21</td>
-			<td class="name-cell">和田剛</td>
-			<td>男</td>
+
+		
+	<% for(ModelStudent SD : StuList){ %>
+		<tr data-id=<%= SD.getGakusekiNo()%>>
+			<td class="rowhead"><%=SD.getGakusekiNo() %></td>
+			<td><%=SD.getClassName() %></td>
+			<td><%=SD.getAttendanceNo() %></td>
+			<td class="name-cell"><%=SD.getName() %></td>
+			<td><%=SD.getSeibetsu() %></td>
 			<td>継続</td>
 			<td>在学</td>
-			<td>福岡</td>
+			<td><%=SD.getKenNaiGaiKibo() %></td>
 			<td>SE</td>
 			<td>PG</td>
 			<td>-</td>
-			<td>ああああああああああああああああああああ！</td>
+			<td><%=SD.getBiko() %></td>
 			<td><button class="more-btn" data-row="1001">&hellip;</button></td>
 		</tr>
-		<tr class="empty" data-id="2001">
-		    <td class="rowhead">2001</td>
-			<td>P2A2</td>
-			<td>5</td>
-			<td class="name-cell">橋本カンナ</td>
-			<td>女</td>
-			<td>辞退</td>
-			<td>休学</td>
-			<td>県外</td>
-			<td>運送</td>
-			<td>飲食</td>
-			<td>インフラ</td>
-			<td>くぁｗせでｄｒふじこ</td>
-			<td><button class="more-btn" data-row="2001">&hellip;</button></td>
-		</tr>
-		<tr data-id="5001">
-		    <td class="rowhead">5001</td>
-		 	<td>S5A4</td>
-			<td>17</td>
-			<td class="name-cell">大谷翔平</td>
-			<td>不明</td>
-			<td>辞退</td>
-			<td>休学</td>
-			<td>県外</td>
-			<td>運送</td>
-			<td>飲食</td>
-			<td>インフラ</td>
-			<td>どどどどどおどどどどどどおどどどどどどおどど</td>
-			<td><button class="more-btn" data-row="5001">&hellip;</button></td>
-		</tr>
-		<tr data-id="5002">
-		    <td class="rowhead">5001</td>
-		 	<td>S5A4</td>
-			<td>17</td>
-			<td class="name-cell">小久保裕紀</td>
-			<td>不明</td>
-			<td>辞退</td>
-			<td>退学</td>
-			<td>県外</td>
-			<td>運送</td>
-			<td>飲食</td>
-			<td>インフラ</td>
-			<td>どどどどどおどどどどどどおどどどどどどおどど</td>
-			<td><button class="more-btn" data-row="5002">&hellip;</button></td>
-		</tr>
-		<tr data-id="1001">
-				<td class="rowhead">1001</td>
-				<td>S3A1</td>
-				<td>21</td>
-				<td class="name-cell">和田剛</td>
-				<td>男</td>
-				<td>継続</td>
-				<td>在学</td>
-				<td>福岡</td>
-				<td>SE</td>
-				<td>PG</td>
-				<td>-</td>
-				<td>ああああああああああああああああああああ！</td>
-				<td><button class="more-btn" data-row="1001">&hellip;</button></td>
-			</tr>
-			<tr class="empty" data-id="2001">
-			    <td class="rowhead">2001</td>
-				<td>P2A2</td>
-				<td>5</td>
-				<td class="name-cell">橋本カンナ</td>
-				<td>女</td>
-				<td>辞退</td>
-				<td>休学</td>
-				<td>県外</td>
-				<td>運送</td>
-				<td>飲食</td>
-				<td>インフラ</td>
-				<td>くぁｗせでｄｒふじこ</td>
-				<td><button class="more-btn" data-row="2001">&hellip;</button></td>
-			</tr>
-			<tr data-id="5001">
-			    <td class="rowhead">5001</td>
-			 	<td>S5A4</td>
-				<td>17</td>
-				<td class="name-cell">大谷翔平</td>
-				<td>不明</td>
-				<td>辞退</td>
-				<td>休学</td>
-				<td>県外</td>
-				<td>運送</td>
-				<td>飲食</td>
-				<td>インフラ</td>
-				<td>どどどどどおどどどどどどおどどどどどどおどど</td>
-				<td><button class="more-btn" data-row="5001">&hellip;</button></td>
-			</tr>
-			<tr data-id="5002">
-			    <td class="rowhead">5001</td>
-			 	<td>S5A4</td>
-				<td>17</td>
-				<td class="name-cell">小久保裕紀</td>
-				<td>不明</td>
-				<td>辞退</td>
-				<td>退学</td>
-				<td>県外</td>
-				<td>運送</td>
-				<td>飲食</td>
-				<td>インフラ</td>
-				<td>どどどどどおどどどどどどおどどどどどどおどど</td>
-				<td><button class="more-btn" data-row="5002">&hellip;</button></td>
-			</tr>
-			<tr data-id="1001">
-					<td class="rowhead">1001</td>
-					<td>S3A1</td>
-					<td>21</td>
-					<td class="name-cell">和田剛</td>
-					<td>男</td>
-					<td>継続</td>
-					<td>在学</td>
-					<td>福岡</td>
-					<td>SE</td>
-					<td>PG</td>
-					<td>-</td>
-					<td>ああああああああああああああああああああ！</td>
-					<td><button class="more-btn" data-row="1001">&hellip;</button></td>
-				</tr>
-				<tr class="empty" data-id="2001">
-				    <td class="rowhead">2001</td>
-					<td>P2A2</td>
-					<td>5</td>
-					<td class="name-cell">橋本カンナ</td>
-					<td>女</td>
-					<td>辞退</td>
-					<td>休学</td>
-					<td>県外</td>
-					<td>運送</td>
-					<td>飲食</td>
-					<td>インフラ</td>
-					<td>くぁｗせでｄｒふじこ</td>
-					<td><button class="more-btn" data-row="2001">&hellip;</button></td>
-				</tr>
-				<tr data-id="5001">
-				    <td class="rowhead">5001</td>
-				 	<td>S5A4</td>
-					<td>17</td>
-					<td class="name-cell">大谷翔平</td>
-					<td>不明</td>
-					<td>辞退</td>
-					<td>休学</td>
-					<td>県外</td>
-					<td>運送</td>
-					<td>飲食</td>
-					<td>インフラ</td>
-					<td>どどどどどおどどどどどどおどどどどどどおどど</td>
-					<td><button class="more-btn" data-row="5001">&hellip;</button></td>
-				</tr>
-				<tr data-id="5002">
-				    <td class="rowhead">5001</td>
-				 	<td>S5A4</td>
-					<td>17</td>
-					<td class="name-cell">小久保裕紀</td>
-					<td>不明</td>
-					<td>辞退</td>
-					<td>退学</td>
-					<td>県外</td>
-					<td>運送</td>
-					<td>飲食</td>
-					<td>インフラ</td>
-					<td>どどどどどおどどどどどどおどどどどどどおどど</td>
-					<td><button class="more-btn" data-row="5002">&hellip;</button></td>
-				</tr>
-				<tr data-id="1001">
-						<td class="rowhead">1001</td>
-						<td>S3A1</td>
-						<td>21</td>
-						<td class="name-cell">和田剛</td>
-						<td>男</td>
-						<td>継続</td>
-						<td>在学</td>
-						<td>福岡</td>
-						<td>SE</td>
-						<td>PG</td>
-						<td>-</td>
-						<td>ああああああああああああああああああああ！</td>
-						<td><button class="more-btn" data-row="1001">&hellip;</button></td>
-					</tr>
-					<tr class="empty" data-id="2001">
-					    <td class="rowhead">2001</td>
-						<td>P2A2</td>
-						<td>5</td>
-						<td class="name-cell">橋本カンナ</td>
-						<td>女</td>
-						<td>辞退</td>
-						<td>休学</td>
-						<td>県外</td>
-						<td>運送</td>
-						<td>飲食</td>
-						<td>インフラ</td>
-						<td>くぁｗせでｄｒふじこ</td>
-						<td><button class="more-btn" data-row="2001">&hellip;</button></td>
-					</tr>
-					<tr data-id="5001">
-					    <td class="rowhead">5001</td>
-					 	<td>S5A4</td>
-						<td>17</td>
-						<td class="name-cell">大谷翔平</td>
-						<td>不明</td>
-						<td>辞退</td>
-						<td>休学</td>
-						<td>県外</td>
-						<td>運送</td>
-						<td>飲食</td>
-						<td>インフラ</td>
-						<td>どどどどどおどどどどどどおどどどどどどおどど</td>
-						<td><button class="more-btn" data-row="5001">&hellip;</button></td>
-					</tr>
-					<tr data-id="5002">
-					    <td class="rowhead">5001</td>
-					 	<td>S5A4</td>
-						<td>17</td>
-						<td class="name-cell">小久保裕紀</td>
-						<td>不明</td>
-						<td>辞退</td>
-						<td>退学</td>
-						<td>県外</td>
-						<td>運送</td>
-						<td>飲食</td>
-						<td>インフラ</td>
-						<td>どどどどどおどどどどどどおどどどどどどおどど</td>
-						<td><button class="more-btn" data-row="5002">&hellip;</button></td>
-					</tr>
+		<%} %>
 	</table>
 	</div>
 

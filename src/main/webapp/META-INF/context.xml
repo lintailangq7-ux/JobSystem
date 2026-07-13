@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Resource name="jdbc/JobSystem"
+	auth="Container"
+	type="javax.sql.DataSource"
+	maxActive="20"
+	initialSoze="10"
+	maxWait="1000"
+	username="root"
+	password="kcsf"
+	driverClassName="com.mysql.cj.jdbc.Driver"
+	url="jdbc:mysql://localhost/disaster?useSSL=false&amp;serverTimezone=Asia/Tokyo"/>
+</Context>

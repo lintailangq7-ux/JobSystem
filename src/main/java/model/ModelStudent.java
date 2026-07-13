@@ -1,8 +1,5 @@
 package model;
 
-//3. Gakusei.java（学生テーブル）
-import java.util.List;
-
 public class ModelStudent {
 
     // 学生メイン情報
@@ -16,13 +13,12 @@ public class ModelStudent {
     private String biko;              // 備考
 
     // 学生中間テーブル（希望職種：複数）
-    private List<StudentChukan> StudentChukanList;
+
 
     public ModelStudent() {}
 
     public ModelStudent(int gakusekiNo, String className, String name, int attendanceNo,
-                        int zaisekiJokyo, String kenNaiGaiKibo, String seibetsu, String biko,
-                        List<StudentChukan> gakuseiChukanList) {
+                        int zaisekiJokyo, String kenNaiGaiKibo, String seibetsu, String biko) {
         this.gakusekiNo = gakusekiNo;
         this.className = className;
         this.name = name;
@@ -31,7 +27,7 @@ public class ModelStudent {
         this.kenNaiGaiKibo = kenNaiGaiKibo;
         this.seibetsu = seibetsu;
         this.biko = biko;
-        this.StudentChukanList = gakuseiChukanList;
+
     }
 
     // Getter & Setter
@@ -59,8 +55,26 @@ public class ModelStudent {
     public String getBiko() { return biko; }
     public void setBiko(String biko) { this.biko = biko; }
 
-    public List<StudentChukan> getGakuseiChukanList() { return StudentChukanList; }
-    public void setGakuseiChukanList(List<StudentChukan> gakuseiChukanList) {
-        this.StudentChukanList = gakuseiChukanList;
+
     }
-}
+
+
+//public int getGakusekiNo() { return gakusekiNo; }
+//
+//
+//public String getClassName() { return className; }
+//
+//
+//public String getName() { return name; }
+//
+//public int getAttendanceNo() { return attendanceNo; }
+//
+//public int getZaisekiJokyo() { return zaisekiJokyo; }
+//
+//public String getKenNaiGaiKibo() { return kenNaiGaiKibo; }
+//
+//
+//public String getSeibetsu() { return seibetsu; }
+//
+//
+//public String getBiko() { return biko; }
