@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.CompanyChukan;
 import model.ModelCompany;   // 企業モデルクラス
+import DAO.CompanyChukanDAO;
 
 public class CompanyDAO {
 
@@ -20,8 +22,8 @@ public class CompanyDAO {
      */
     public List<ModelCompany> findAll() {
         List<ModelCompany> list = new ArrayList<>();
-
-        String sql = "SELECT 企業ID, 会社名, 住所, 電話番号, メールアドレス, 採用実績 " +
+        CompanyChukan
+        String sql = "SELECT * " +
                      "FROM 企業 " +
                      "ORDER BY 企業ID";
 
@@ -35,13 +37,16 @@ public class CompanyDAO {
                 while (rs.next()) {
                 	ModelCompany c = new ModelCompany();
 
-                    c.setKigyouId(rs.getInt("企業ID"));
-                    c.setKaishaMei(rs.getString("会社名"));
-                    c.setJusho(rs.getString("住所"));
-                    c.setDenwaBangou(rs.getString("電話番号"));
-                    c.setMailAddress(rs.getString("メールアドレス"));
+                    c.setKaishaId(rs.getInt("企業ID"));
+                    c.setKaishaName(rs.getString("会社名"));
+                    c.setAddress(rs.getString("住所"));
+                    c.setTel(rs.getString("電話番号"));
+                    c.setEmail(rs.getString("メールアドレス"));
                     c.setSaiyoJisseki(rs.getInt("採用実績"));
-
+                    c.setSaiyoJisseki(rs.getString("勤務地"));
+                    
+                    CChukanDAO.
+                    
                     list.add(c);
                 }
             }
@@ -52,4 +57,6 @@ public class CompanyDAO {
         return list;
     }
 }
+
+
 

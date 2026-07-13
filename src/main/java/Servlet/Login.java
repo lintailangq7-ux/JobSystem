@@ -43,7 +43,8 @@ public class Login extends HttpServlet {
 
         String userId = request.getParameter("userId");
         String password = request.getParameter("password");
-
+        
+        
         // TODO: 本来はDB照合処理を書く
         // 仮の認証（後で本物に置き換えてください）
         boolean isValid = false;
