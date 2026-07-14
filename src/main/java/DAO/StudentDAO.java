@@ -17,7 +17,7 @@ import model.StudentChukan;
 
 public class StudentDAO {
 	//データベースに接続に使用する情報
-	private final String JDBC_URL = "jdbc:mysql://localhost/JobSystem";
+	private final String JDBC_URL = "jdbc:mysql://localhost/jop_managment_system";
 	private final String DB_USER ="root";
 	private final String DB_PASS ="kcsf";
 	
@@ -29,7 +29,7 @@ public class StudentDAO {
 			
 			try {
 				initCtx = new InitialContext();
-				ds =(DataSource)initCtx.lookup("java:comp/env/jdbc/JobSystem");
+				ds =(DataSource)initCtx.lookup("java:comp/env/jdbc/jop_managment_system");
 				
 			}catch(NamingException e) {
 				e.printStackTrace(); 

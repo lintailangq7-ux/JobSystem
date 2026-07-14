@@ -287,7 +287,14 @@
 			<td><%=SD.getClassName() %></td>
 			<td><%=SD.getAttendanceNo() %></td>
 			<td class="name-cell"><%=SD.getName() %></td>
-			<td><%=SD.getSeibetsu() %></td>
+			<%String Sei = SD.getSeibetsu();
+			  if(Sei.equals("F")){ %>
+			  <td>女</td>
+			 <% }else if(Sei.equals("M")){%>
+			 <td>男</td>
+			 <% }else if(Sei.equals("X")){%>
+			 <td>未</td>
+			 <%} %>			 
 			<td>継続</td>
 			<td>在学</td>
 			<td><%=SD.getKenNaiGaiKibo() %></td>
@@ -295,7 +302,7 @@
 			<td>PG</td>
 			<td>-</td>
 			<td><%=SD.getBiko() %></td>
-			<td><button class="more-btn" data-row="1001">&hellip;</button></td>
+			<td><button class="more-btn" data-row=<%=SD.getGakusekiNo() %>>&hellip;</button></td>
 		</tr>
 		<%} %>
 	</table>
