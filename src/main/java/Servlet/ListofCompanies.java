@@ -21,24 +21,28 @@ public class ListofCompanies extends HttpServlet {
 	            throws ServletException, IOException {
 
 	        // JSPから検索文字を受け取る
-	        String keyword = request.getParameter("keyword");
+		 
+
+	       String keyword = request.getParameter("keyword");
 	        
 
-	        // DAOで検索
+	        //DAOで検索
 	        CompanyDAO dao = new CompanyDAO();
 	        List<Company> companyList;
 	        
 	        if (keyword == null || keyword.trim().isEmpty()) {
-	            companyList = dao.findAll();      // 初回表示：全件取得
+	           companyList = dao.findAllCompany();      // 初回表示：全件取得
 	        } else {
 	            companyList = dao.search(keyword); // 検索時：条件に合うものだけ取得
 	        }
+	        System.out.println("keyword = " + keyword);
+	        System.out.println("件数 = " + companyList.size());
 
 	        // JSPへ渡す
 	        request.setAttribute("companyList", companyList);
 
 	        // 一覧画面へ戻る
-	        RequestDispatcher rd =request.getRequestDispatcher("/WEB-INF/jsp/ListofCompanies.jsp");
+	       RequestDispatcher rd =request.getRequestDispatcher("/jsp/ListofCompanies.jsp");
 
 	        rd.forward(request, response);
 

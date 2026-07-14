@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Company;
 import model.ModelCompany;   // 企業モデルクラス
 
 public class CompanyDAO {
@@ -54,6 +55,88 @@ public class CompanyDAO {
         }
         return list;
     }
+
+	public List<Company> findAllCompany() {
+		// TODO 自動生成されたメソッド・スタブ
+		 List<Company> companyList = new ArrayList<>();
+
+		    try {
+
+		        Connection con = DriverManager.getConnection(URL,USER,PASS);
+
+		        String sql = "SELECT 企業ID, 企業名, 住所, 電話番号, メールアドレス, 採用実績 FROM `企業テーブル`";
+
+		        PreparedStatement ps = con.prepareStatement(sql);
+
+		        ResultSet rs = ps.executeQuery();
+		        System.out.println("SQL実行しました");
+
+		        while (rs.next()) {
+		        	System.out.println(rs.getString("企業名"));
+		            Company company = new Company();
+
+		            company.setId(rs.getInt("企業ID"));
+		            company.setName(rs.getString("企業名"));
+		            company.setAddress(rs.getString("住所"));
+		            company.setTel(rs.getString("電話番号"));
+		            company.setMail(rs.getString("メールアドレス"));
+		            company.setJobtype(rs.getString("採用実績"));
+
+		            companyList.add(company);
+		        }
+
+		        rs.close();
+		        ps.close();
+		        con.close();
+
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+
+		    return companyList;
+		
+	}
+
+	public List<Company> search(String keyword) {
+		// TODO 自動生成されたメソッド・スタブ
+		 List<Company> companyList = new ArrayList<>();
+
+		    try {
+
+		        Connection con = DriverManager.getConnection(URL,USER,PASS);
+
+		        String sql = "SELECT 企業ID, 企業名, 住所, 電話番号, メールアドレス, 採用実績 "
+		                   + "FROM `企業テーブル` WHERE 企業名 LIKE ?";
+
+		        PreparedStatement ps = con.prepareStatement(sql);
+		        ps.setString(1, "%" + keyword + "%");
+
+		        ResultSet rs = ps.executeQuery();
+
+		        while (rs.next()) {
+
+		            Company company = new Company();
+
+		            company.setId(rs.getInt("企業ID"));
+		            company.setName(rs.getString("企業名"));
+		            company.setAddress(rs.getString("住所"));
+		            company.setTel(rs.getString("電話番号"));
+		            company.setMail(rs.getString("メールアドレス"));
+		            company.setJobtype(rs.getString("採用実績"));
+
+		            companyList.add(company);
+		        }
+
+		        rs.close();
+		        ps.close();
+		        con.close();
+
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+
+		    return companyList;
+	}
 }
 
 
