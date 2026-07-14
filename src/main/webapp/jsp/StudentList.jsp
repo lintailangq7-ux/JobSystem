@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="model.ModelStudent,java.util.List" %>
+    <%@ page import="model.ModelStudent,java.util.List model.StudentChukan, java.util.List, java.util.ArrayList" %>
 <%
  	ModelStudent Sdata = (ModelStudent)session.getAttribute("Sdata");
 	List<ModelStudent> StuList = (List<ModelStudent>)request.getAttribute("StuList");
@@ -295,9 +295,22 @@
 			 <% }else if(Sei.equals("X")){%>
 			 <td>未</td>
 			 <%} %>			 
+			 <%=SD.getGakuseiChukanList()%>
 			<td>継続</td>
 			<td>在学</td>
 			<td><%=SD.getKenNaiGaiKibo() %></td>
+			
+			 <%
+                List<StudentChukan> chukanList = SD.getGakuseiChukanList();
+                String kibou1 = chukanList.get:
+                String kibou2 =;
+               %>
+            <td><%= kibou1 %></td>
+            <td><%= kibou2 %></td>
+            <td><%= kibou3 %></td>
+			
+			
+			
 			<td>SE</td>
 			<td>PG</td>
 			<td>-</td>

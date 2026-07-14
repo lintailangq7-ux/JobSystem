@@ -23,6 +23,8 @@ public class StudentDAO {
 	
 	public List<ModelStudent> findAll(){
 		 List<ModelStudent> StuList = new ArrayList<>(); 
+			StudentChukanDAO StuCukan = new StudentChukanDAO();
+
 			
 			InitialContext initCtx;
 			DataSource ds =null;
@@ -49,7 +51,8 @@ public class StudentDAO {
 					String kenNaiGaiKibo = rs.getString("県内外の希望");
 					String seibetsu = rs.getString("性別");
 					String biko = rs.getString("備考");
-					ModelStudent StuData = new ModelStudent(gakusekiNo,className,name,attendanceNo,zaisekiJokyo,kenNaiGaiKibo,seibetsu,biko);
+					 List<StudentChukan> list = StuCukan.findById(gakusekiNo);
+					ModelStudent StuData = new ModelStudent(gakusekiNo,className,name,attendanceNo,zaisekiJokyo,kenNaiGaiKibo,seibetsu,biko,list);
 					StuList.add(StuData);
 				}
 			}catch (Exception e) {
