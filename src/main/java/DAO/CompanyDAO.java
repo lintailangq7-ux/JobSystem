@@ -20,9 +20,9 @@ public class CompanyDAO {
      */
     public List<ModelCompany> findAll() {
         List<ModelCompany> list = new ArrayList<>();
-
-        String sql = "SELECT 企業ID, 会社名, 住所, 電話番号, メールアドレス, 採用実績 " +
-                     "FROM 企業 " +
+        CompanyChukanDAO CompanyChukanDAO = new CompanyChukanDAO();
+        String sql = "SELECT * " +
+                     "FROM 企業テーブル " +
                      "ORDER BY 企業ID";
 
         try {
@@ -35,13 +35,16 @@ public class CompanyDAO {
                 while (rs.next()) {
                 	ModelCompany c = new ModelCompany();
 
-                    c.setKigyouId(rs.getInt("企業ID"));
-                    c.setKaishaMei(rs.getString("会社名"));
-                    c.setJusho(rs.getString("住所"));
-                    c.setDenwaBangou(rs.getString("電話番号"));
-                    c.setMailAddress(rs.getString("メールアドレス"));
+                    c.setKaishaId(rs.getString("企業ID"));
+                    c.setKaishaName(rs.getString("企業名"));
+                    c.setAddress(rs.getString("住所"));
+                    c.setTel(rs.getString("電話番号"));
+                    c.setEmail(rs.getString("メールアドレス"));
                     c.setSaiyoJisseki(rs.getInt("採用実績"));
-
+                    c.setKinmuChi(rs.getString("勤務地"));
+                    
+                    c.setKaishaChukanList(CompanyChukanDAO.findById(rs.getString("企業ID"))); 
+                    
                     list.add(c);
                 }
             }
@@ -52,4 +55,6 @@ public class CompanyDAO {
         return list;
     }
 }
+
+
 

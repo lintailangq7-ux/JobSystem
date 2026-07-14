@@ -2,6 +2,11 @@
          pageEncoding="UTF-8"
          import="java.util.List, model.*" %>
 <!DOCTYPE html>
+
+<%
+// セッションから学生リストを受け取る
+OllData OllData = (OllData) session.getAttribute("Olldata");
+%>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -15,56 +20,7 @@
     </style>
 </head>
 <body>
-<%
- // セッションから学生リストを受け取る
- OllData OllData = (OllData) session.getAttribute("Olldata");
-%>
-
-
-</body>
     <div class="main-container">
-        <!-- 左側：生徒情報 -->
-        <div class="student-info">
-            <div class="title-box">指導一覧</div>
-            
-            <table class="student-table">
-                <tr>
-                    <td class="header"><%= OllData %></td>
-                    <td>山田太郎</td>
-                </tr>
-                <tr>
-                    <td class="header">クラス</td>
-                    <td>S3A1</td>
-                </tr>
-                <tr>
-                    <td class="header">番号</td>
-                    <td class="number">32</td>
-                </tr>
-                <tr>
-                    <td class="header">性別</td>
-                    <td>男</td>
-                </tr>
-            </table>
-
-            <br>
-
-            <table class="student-table">
-                <tr>
-                    <td class="header">志望業種</td>
-                    <td>SE・PG</td>
-                </tr>
-                <tr>
-                    <td class="header">志望地域</td>
-                    <td>福岡・関東</td>
-                </tr>
-                <tr>
-                    <td class="header">内定状況</td>
-                    <td>未</td>
-                </tr>
-            </table>
-
-            <div class="remarks-box">備考</div>
-        </div>
 
         <!-- 右側：指導一覧 -->
         <div class="guidance-area">
@@ -76,15 +32,15 @@
                                 <th>指導ID</th>
                                 <th>企業名</th>
                                 <th>選考状況</th>
-                                <th>業種</th>
+                                <th>選考状況</th>
                                 <th>備考</th>
                                 <th class="action-col"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="id-cell">ID01</td>
-                                <td>KCSシステムズ</td>
+                                <td class="id-cell"><%= OllData.getEmployment().get(1).getShidoId()  %></td>
+                                <td<%= OllData.getCompany().get(1).getKaishaName()  %></td>
                                 <td>6/3　企業説明会</td>
                                 <td>SE・PG</td>
                                 <td></td>
@@ -205,8 +161,9 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-
+            </div>	
+            <button class="btn-add">学生一覧</button>
+			<button class="btn-add">活動報告書</button>
             <button class="btn-add">追加</button>
         </div>
     </div>
