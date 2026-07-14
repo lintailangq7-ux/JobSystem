@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"
-         import="java.util.List, model.*" %>
+         import="java.time.format.DateTimeFormatter,
+                 DAO.StudentDetailDAO, model.StudentDetail,
+                 model.GuidanceDetail, model.EmploymentChukan" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -16,8 +18,10 @@
 </head>
 <body>
 <%
- // セッションから学生リストを受け取る
- OllData OllData = (OllData) session.getAttribute("Olldata");
+    int gakusekiNo = Integer.parseInt(request.getParameter("gakusekiNo"));
+    StudentDetailDAO dao = new StudentDetailDAO();
+    StudentDetail detail = dao.findByGakusekiNo(gakusekiNo);
+    DateTimeFormatter dateFmt = DateTimeFormatter.ofPattern("M/d");
 %>
 
 
@@ -29,29 +33,30 @@
             
             <table class="student-table">
                 <tr>
-                    <td class="header"><%= OllData %></td>
-                    <td>山田太郎</td>
+                    <td class="header">氏名</td>
+                    <td><%= detail.getStudent().getName() %></td>
                 </tr>
                 <tr>
                     <td class="header">クラス</td>
-                    <td>S3A1</td>
+                    <td><%= detail.getStudent().getClassName()%></td>
                 </tr>
                 <tr>
                     <td class="header">番号</td>
-                    <td class="number">32</td>
+                    <td class="number"><%= detail.getStudent().getAttendanceNo()%></td>
                 </tr>
                 <tr>
                     <td class="header">性別</td>
-                    <td>男</td>
+                    <td><%= detail.getStudent().getSeibetsu()%></td>
                 </tr>
             </table>
 
             <br>
 
             <table class="student-table">
+            <%=for()
                 <tr>
                     <td class="header">志望業種</td>
-                    <td>SE・PG</td>
+                    <td><%= detail.getStudent().getGakuseiChukanList().get(1).getKibouShokushu()%></td>
                 </tr>
                 <tr>
                     <td class="header">志望地域</td>

@@ -4,13 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.CompanyChukan;
-import model.EmploymentChukan;
 import model.GuidanceDetail;
 import model.ModelCompany;
 import model.ModelStudent;
@@ -22,7 +19,7 @@ public class StudentDetailDAO {
     private static final String USER = "root";
     private static final String PASS = "kcsf";
 
-    public StudentDetail findByGakusekiNo(int gakusekiNo) {
+    public StudentDetail findByGakusekiNo(String gakusekiNo) {
 
         ModelStudent student = findStudent(gakusekiNo);
         if (student == null) return null;
@@ -32,13 +29,19 @@ public class StudentDetailDAO {
         return new StudentDetail(student, guidanceList);
     }
 
-    private ModelStudent findStudent(int gakusekiNo) {
+    private ModelStudent findStudent(String gakusekiNo) {
+    	
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         String sql = "SELECT * FROM 学生テーブル WHERE 学籍番号 = ?";
 
         try (Connection con = DriverManager.getConnection(URL, USER, PASS);
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setInt(1, gakusekiNo);
+            ps.setString(1, gakusekiNo);
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -60,9 +63,11 @@ public class StudentDetailDAO {
         return null;
     }
 
-    private List<GuidanceDetail> findGuidanceList(int gakusekiNo) {
+    private List<GuidanceDetail> findGuidanceList(String gakusekiNo) {
         List<GuidanceDetail> list = new ArrayList<>();
-
+        CompanyChukanDAO  CompanyChukanDAO  = new CompanyChukanDAO();
+        EmploymentChukanDAO EmploymentChukanDAO = new EmploymentChukanDAO();
+        
         // 指導 + 企業 を1回のJOINで取得（企業中間は別途IDで取りに行く）
         String sql =
             "SELECT j.指導ID, j.内定確定日, j.内定確定, j.備考 AS 指導備考, " +
@@ -75,7 +80,7 @@ public class StudentDetailDAO {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS);
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setInt(1, gakusekiNo);
+            ps.setString(1, gakusekiNo);
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
@@ -96,10 +101,10 @@ public class StudentDetailDAO {
                     company.setEmail(rs.getString("メールアドレス"));
                     company.setSaiyoJisseki(rs.getInt("採用実績"));
                     company.setKinmuChi(rs.getString("勤務地"));
-                    company.setKaishaChukanList(findCompanyChukan(con, kaishaId));
+                    company.setKaishaChukanList(CompanyChukanDAO.findById(kaishaId));
                     gd.setCompany(company);
 
-                    gd.setExamHistory(findExamHistory(con, gd.getShidoId()));
+                    gd.setExamHistory(EmploymentChukanDAO.findById(gd.getShidoId()));
 
                     list.add(gd);
                 }
@@ -110,40 +115,5 @@ public class StudentDetailDAO {
         return list;
     }
 
-    private List<CompanyChukan> findCompanyChukan(Connection con, String kaishaId) throws SQLException {
-        List<CompanyChukan> list = new ArrayList<>();
-        String sql = "SELECT 募集職種 FROM 企業中間 WHERE 企業ID = ?";
-
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, kaishaId);
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    list.add(new CompanyChukan(kaishaId, rs.getString("募集職種")));
-                }
-            }
-        }
-        return list;
-    }
-
-    private List<EmploymentChukan> findExamHistory(Connection con, String shidoId) throws SQLException {
-        List<EmploymentChukan> list = new ArrayList<>();
-        String sql = "SELECT * FROM 就職情報中間テーブル WHERE 指導ID = ? ORDER BY 試験日時";
-
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, shidoId);
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    EmploymentChukan ec = new EmploymentChukan();
-                    ec.setShidoId(shidoId);
-                    Timestamp ts = rs.getTimestamp("試験日時");
-                    if (ts != null) ec.setShikenNichiji(ts.toLocalDateTime());
-                    ec.setShikenNaiyo(rs.getString("試験内容"));
-                    ec.setTeishutsuShoruiJokyo(rs.getInt("提出書類状況"));
-                    ec.setShikenKaijo(rs.getString("試験会場"));
-                    list.add(ec);
-                }
-            }
-        }
-        return list;
-    }
+   
 }
