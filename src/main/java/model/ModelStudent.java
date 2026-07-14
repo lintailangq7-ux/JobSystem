@@ -59,8 +59,10 @@ public class ModelStudent {
     public String getBiko() { return biko; }
     public void setBiko(String biko) { this.biko = biko; }
 
-    public List<StudentChukan> getGakuseiChukanList() { return StudentChukanList; }
-    public void setGakuseiChukanList(List<StudentChukan> gakuseiChukanList) {
+    public List<StudentChukan> getStudentChukanListt() { return StudentChukanList; }
+    public void setStudentChukanList(List<StudentChukan> gakuseiChukanList) {
         this.StudentChukanList = gakuseiChukanList;
     }
+    
+    
 }
