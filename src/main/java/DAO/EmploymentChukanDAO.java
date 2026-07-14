@@ -16,7 +16,7 @@ public class EmploymentChukanDAO {
     private static final String USER = "root";
     private static final String PASS = "kcsf";
     
-    public List<EmploymentChukan> findById(String kaishaId) {
+    public List<EmploymentChukan> findById(String shidoId) {
     	
         List<EmploymentChukan> list = new ArrayList<>();
         
@@ -25,26 +25,21 @@ public class EmploymentChukanDAO {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS);
                 PreparedStatement ps = con.prepareStatement(sql)) {
         	
-               ps.setString(1, kaishaId);
+               ps.setString(1, shidoId);
                
                try (ResultSet rs = ps.executeQuery()) {
-                   if (rs.next()) {
-                	  EmploymentChukan c = new EmploymentChukan();
-
-                	  c.setShidoId(rs.getString("指導ID"));
-                      Timestamp ts = rs.getTimestamp("試験日時");
-                      if (ts != null) {
-                    	  c.setShikenNichiji(ts.toLocalDateTime());
-                      }
-
-                      c.setShikenNaiyo(rs.getString("試験内容"));
-                      c.setTeishutsuShoruiJokyo(rs.getInt("提出書類状況"));
-                      c.setShikenKaijo(rs.getString("試験会場"));
-          
-                    
-                    list.add(c);
-                }
-            }
+                   while (rs.next()) {
+                       EmploymentChukan ec = new EmploymentChukan();
+                       ec.setShidoId(shidoId);
+                       Timestamp ts = rs.getTimestamp("試験日時");
+                       if (ts != null) ec.setShikenNichiji(ts.toLocalDateTime());
+                       ec.setShikenNaiyo(rs.getString("試験内容"));
+                       ec.setTeishutsuShoruiJokyo(rs.getInt("提出書類状況"));
+                       ec.setShikenKaijo(rs.getString("試験会場"));
+                       list.add(ec);
+                   }
+               }
+     
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("企業データ取得エラー: " + e.getMessage());

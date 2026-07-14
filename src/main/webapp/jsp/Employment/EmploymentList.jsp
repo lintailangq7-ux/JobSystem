@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"
-         import="java.util.List, model.*" %>
+         import="java.time.format.DateTimeFormatter,
+                 DAO.StudentDetailDAO, model.StudentDetail,
+                 model.GuidanceDetail, model.EmploymentChukan" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -16,8 +18,10 @@
 </head>
 <body>
 <%
- // セッションから学生リストを受け取る
- OllData OllData = (OllData) session.getAttribute("Olldata");
+    int gakusekiNo = Integer.parseInt(request.getParameter("gakusekiNo"));
+    StudentDetailDAO dao = new StudentDetailDAO();
+    StudentDetail detail = dao.findByGakusekiNo(gakusekiNo);
+    DateTimeFormatter dateFmt = DateTimeFormatter.ofPattern("M/d");
 %>
 
 
