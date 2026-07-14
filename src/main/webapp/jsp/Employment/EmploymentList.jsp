@@ -33,29 +33,30 @@
             
             <table class="student-table">
                 <tr>
-                    <td class="header"><%= OllData %></td>
-                    <td>山田太郎</td>
+                    <td class="header">氏名</td>
+                    <td><%= detail.getStudent().getName() %></td>
                 </tr>
                 <tr>
                     <td class="header">クラス</td>
-                    <td>S3A1</td>
+                    <td><%= detail.getStudent().getClassName()%></td>
                 </tr>
                 <tr>
                     <td class="header">番号</td>
-                    <td class="number">32</td>
+                    <td class="number"><%= detail.getStudent().getAttendanceNo()%></td>
                 </tr>
                 <tr>
                     <td class="header">性別</td>
-                    <td>男</td>
+                    <td><%= detail.getStudent().getSeibetsu()%></td>
                 </tr>
             </table>
 
             <br>
 
             <table class="student-table">
+            <%=for()
                 <tr>
                     <td class="header">志望業種</td>
-                    <td>SE・PG</td>
+                    <td><%= detail.getStudent().getGakuseiChukanList().get(1).getKibouShokushu()%></td>
                 </tr>
                 <tr>
                     <td class="header">志望地域</td>
