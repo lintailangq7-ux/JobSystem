@@ -30,17 +30,13 @@ public class CompanyChukanDAO {
                ps.setString(1, kaishaId);
                
                try (ResultSet rs = ps.executeQuery()) {
-                   if (rs.next()) {
-                	CompanyChukan c = new CompanyChukan();
-
-                    c.setBoshuShokushu(rs.getString("企業ID"));
-                    c.setBoshuShokushu(rs.getString("募集職種"));
-                    
-          
-                    
-                    list.add(c);
-                }
-            }
+            	   
+                   while (rs.next()) {
+                       list.add(new CompanyChukan(kaishaId, rs.getString("募集職種")));
+                   }
+               }
+               
+  
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("企業データ取得エラー: " + e.getMessage());

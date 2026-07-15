@@ -1,10 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"
+         import="java.time.format.DateTimeFormatter,
+                 DAO.StudentDetailDAO, model.StudentDetail,
+                 model.GuidanceDetail, model.EmploymentChukan,
+                 model.StudentChukan" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>指導一覧 - Job Hunting Management System</title>
+    <title>指導一覧</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/Employment.css"> <!-- CSSファイルの読み込み -->
     <style>
@@ -13,6 +18,15 @@
     </style>
 </head>
 <body>
+<%
+	String gakusekiNo = (String) session.getAttribute("userId");
+    StudentDetailDAO dao = new StudentDetailDAO();
+    StudentDetail detail = dao.findByGakusekiNo(gakusekiNo);
+    DateTimeFormatter dateFmt = DateTimeFormatter.ofPattern("M/d");
+%>
+
+
+</body>
     <div class="main-container">
         <!-- 左側：生徒情報 -->
         <div class="student-info">
@@ -20,37 +34,52 @@
             
             <table class="student-table">
                 <tr>
-                    <td class="header">名前</td>
-                    <td>山田太郎</td>
+                    <td class="header">氏名</td>
+                    <td><%= detail.getStudent().getName() %></td>
                 </tr>
                 <tr>
                     <td class="header">クラス</td>
-                    <td>S3A1</td>
+                    <td><%= detail.getStudent().getClassName()%></td>
                 </tr>
                 <tr>
                     <td class="header">番号</td>
-                    <td class="number">32</td>
+                    <td class="number"><%= detail.getStudent().getAttendanceNo()%></td>
                 </tr>
                 <tr>
                     <td class="header">性別</td>
-                    <td>男</td>
+                    <td><%= detail.getStudent().getSeibetsu()%></td>
                 </tr>
             </table>
 
             <br>
 
             <table class="student-table">
+            <%for(StudentChukan Sc:  detail.getStudent().getStudentChukanListt()){ %>
                 <tr>
                     <td class="header">志望業種</td>
-                    <td>SE・PG</td>
+                    <td><%= Sc.getKibouShokushu() %></td>
                 </tr>
+             <%} %>
                 <tr>
                     <td class="header">志望地域</td>
-                    <td>福岡・関東</td>
+                    <td><%= detail.getStudent().getKenNaiGaiKibo()%></td>
                 </tr>
                 <tr>
                     <td class="header">内定状況</td>
-                    <td>未</td>
+				<%
+				boolean naitei = false;
+
+				for (GuidanceDetail Ed : detail.getGuidanceList()) {
+    				if (Ed.getNaiteiKakutei() == 1) {
+        				naitei = true;
+        				break; // 1件見つかったら終了
+   					}
+				}
+				%>
+
+					<td><%= naitei ? "内" : "未" %></td>
+                    
+                    
                 </tr>
             </table>
 
