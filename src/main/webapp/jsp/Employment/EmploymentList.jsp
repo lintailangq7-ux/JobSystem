@@ -2,7 +2,8 @@
          pageEncoding="UTF-8"
          import="java.time.format.DateTimeFormatter,
                  DAO.StudentDetailDAO, model.StudentDetail,
-                 model.GuidanceDetail, model.EmploymentChukan" %>
+                 model.GuidanceDetail, model.EmploymentChukan,
+                 model.StudentChukan" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -18,7 +19,7 @@
 </head>
 <body>
 <%
-    int gakusekiNo = Integer.parseInt(request.getParameter("gakusekiNo"));
+	String gakusekiNo = (String) session.getAttribute("userId");
     StudentDetailDAO dao = new StudentDetailDAO();
     StudentDetail detail = dao.findByGakusekiNo(gakusekiNo);
     DateTimeFormatter dateFmt = DateTimeFormatter.ofPattern("M/d");
@@ -53,18 +54,32 @@
             <br>
 
             <table class="student-table">
-            <%=for()
+            <%for(StudentChukan Sc:  detail.getStudent().getStudentChukanListt()){ %>
                 <tr>
                     <td class="header">志望業種</td>
-                    <td><%= detail.getStudent().getGakuseiChukanList().get(1).getKibouShokushu()%></td>
+                    <td><%= Sc.getKibouShokushu() %></td>
                 </tr>
+             <%} %>
                 <tr>
                     <td class="header">志望地域</td>
-                    <td>福岡・関東</td>
+                    <td><%= detail.getStudent().getKenNaiGaiKibo()%></td>
                 </tr>
                 <tr>
                     <td class="header">内定状況</td>
-                    <td>未</td>
+				<%
+				boolean naitei = false;
+
+				for (GuidanceDetail Ed : detail.getGuidanceList()) {
+    				if (Ed.getNaiteiKakutei() == 1) {
+        				naitei = true;
+        				break; // 1件見つかったら終了
+   					}
+				}
+				%>
+
+					<td><%= naitei ? "内" : "未" %></td>
+                    
+                    
                 </tr>
             </table>
 
