@@ -3,7 +3,7 @@ package model;
 import java.util.List;
 
 public class Company {
-	 private int id;//ID
+	    private String id;//ID
 	    private String name;//企業名
 	    private String address;//住所
 	    private String tel;//電話番号
@@ -12,7 +12,7 @@ public class Company {
 
 private List<Company>CompanyList;
 public Company() {}
-public Company(int id,String name,String address,String tel,String mail,String jobtype,List<Company> CompanyList) {
+public Company(String id,String name,String address,String tel,String mail,String jobtype,List<Company> CompanyList) {
 	this.id=id;
 	this.name=name;
 	this.address=address;
@@ -22,11 +22,11 @@ public Company(int id,String name,String address,String tel,String mail,String j
 	this.CompanyList=CompanyList;
 }
 	    
-		public int getId() {
+		public String getId() {
 	        return id;
 	    }
 
-	    public void setId(int id) {
+	    public void setId(String id) {
 	        this.id = id;
 	    }
 

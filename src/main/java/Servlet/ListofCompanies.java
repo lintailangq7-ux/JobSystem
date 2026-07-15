@@ -39,6 +39,7 @@ public class ListofCompanies extends HttpServlet {
 	        System.out.println("件数 = " + companyList.size());
 
 	        // JSPへ渡す
+	       
 	        request.setAttribute("companyList", companyList);
 
 	        // 一覧画面へ戻る

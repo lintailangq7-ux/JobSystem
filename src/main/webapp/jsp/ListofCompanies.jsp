@@ -170,8 +170,7 @@
 	</thead>
 	<tbody id="companyTable">
 	<%
-List<Company> list = 
-    (List<Company>)request.getAttribute("companyList");
+List<Company> list = (List<Company>)request.getAttribute("companyList");
 
 if(list != null){
 
@@ -201,6 +200,7 @@ if(list != null){
 				<%
     }
 }
+
 %>
 				</tbody>
 				
