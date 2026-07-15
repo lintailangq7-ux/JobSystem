@@ -54,7 +54,7 @@
             <br>
 
             <table class="student-table">
-            <%for(StudentChukan Sc:  detail.getStudent().getStudentChukanListt()){ %>
+            <%for(StudentChukan Sc:  detail.getStudent().getStudentChukanList()){ %>
                 <tr>
                     <td class="header">志望業種</td>
                     <td><%= Sc.getKibouShokushu() %></td>
