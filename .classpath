@@ -13,10 +13,23 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/246133/Documents/Syukatu/JobSystem/src/main/webapp/WEB-INF/lib/mysql-connector-java-8.0.23.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+=======
+<<<<<<< HEAD
+	<classpathentry kind="lib" path="//room108/Sys/S3/10_システム構築総合演習/09_提出/17三原家/mysql-connector-java-8.0.23.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/mysql-connector-java-8.0.23.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+=======
+	<classpathentry kind="lib" path="C:/Users/246146/git/JobSystem/JobSystem/src/main/webapp/lib/mysql-connector-java-8.0.23.jar"/>
+>>>>>>> branch 'main' of git@github.com:lintailangq7-ux/JobSystem.git
+>>>>>>> branch 'main' of git@github.com:lintailangq7-ux/JobSystem.git
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

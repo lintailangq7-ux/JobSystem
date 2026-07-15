@@ -35,27 +35,35 @@ public class ModelStudent {
     }
 
     // Getter & Setter
+    //学籍
     public int getGakusekiNo() { return gakusekiNo; }
     public void setGakusekiNo(int gakusekiNo) { this.gakusekiNo = gakusekiNo; }
 
+    //クラス
     public String getClassName() { return className; }
     public void setClassName(String className) { this.className = className; }
 
+    //氏名
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
+    //あっせん状況
     public int getAttendanceNo() { return attendanceNo; }
     public void setAttendanceNo(int attendanceNo) { this.attendanceNo = attendanceNo; }
 
+    //在籍状況
     public int getZaisekiJokyo() { return zaisekiJokyo; }
     public void setZaisekiJokyo(int zaisekiJokyo) { this.zaisekiJokyo = zaisekiJokyo; }
 
+    //県内外
     public String getKenNaiGaiKibo() { return kenNaiGaiKibo; }
     public void setKenNaiGaiKibo(String kenNaiGaiKibo) { this.kenNaiGaiKibo = kenNaiGaiKibo; }
 
+    //性別
     public String getSeibetsu() { return seibetsu; }
     public void setSeibetsu(String seibetsu) { this.seibetsu = seibetsu; }
 
+    //備考
     public String getBiko() { return biko; }
     public void setBiko(String biko) { this.biko = biko; }
 
@@ -63,6 +71,4 @@ public class ModelStudent {
     public void setStudentChukanList(List<StudentChukan> gakuseiChukanList) {
         this.StudentChukanList = gakuseiChukanList;
     }
-    
-    
 }

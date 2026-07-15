@@ -17,19 +17,21 @@ import model.StudentChukan;
 
 public class StudentDAO {
 	//データベースに接続に使用する情報
-	private final String JDBC_URL = "jdbc:mysql://localhost/JobSystem";
+	private final String JDBC_URL = "jdbc:mysql://localhost/jop_managment_system";
 	private final String DB_USER ="root";
 	private final String DB_PASS ="kcsf";
 	
 	public List<ModelStudent> findAll(){
 		 List<ModelStudent> StuList = new ArrayList<>(); 
+			StudentChukanDAO StuCukan = new StudentChukanDAO();
+
 			
 			InitialContext initCtx;
 			DataSource ds =null;
 			
 			try {
 				initCtx = new InitialContext();
-				ds =(DataSource)initCtx.lookup("java:comp/env/jdbc/JobSystem");
+				ds =(DataSource)initCtx.lookup("java:comp/env/jdbc/jop_managment_system");
 				
 			}catch(NamingException e) {
 				e.printStackTrace(); 
@@ -49,7 +51,8 @@ public class StudentDAO {
 					String kenNaiGaiKibo = rs.getString("県内外の希望");
 					String seibetsu = rs.getString("性別");
 					String biko = rs.getString("備考");
-					ModelStudent StuData = new ModelStudent(gakusekiNo,className,name,attendanceNo,zaisekiJokyo,kenNaiGaiKibo,seibetsu,biko);
+					 List<StudentChukan> list = StuCukan.findById(gakusekiNo);
+					ModelStudent StuData = new ModelStudent(gakusekiNo,className,name,attendanceNo,zaisekiJokyo,kenNaiGaiKibo,seibetsu,biko,list);
 					StuList.add(StuData);
 				}
 			}catch (Exception e) {

@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="model.ModelStudent,java.util.List" %>
+    <%@ page import="model.ModelStudent,model.StudentChukan, java.util.List, java.util.ArrayList" %>
 <%
  	ModelStudent Sdata = (ModelStudent)session.getAttribute("Sdata");
 	List<ModelStudent> StuList = (List<ModelStudent>)request.getAttribute("StuList");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -287,15 +288,41 @@
 			<td><%=SD.getClassName() %></td>
 			<td><%=SD.getAttendanceNo() %></td>
 			<td class="name-cell"><%=SD.getName() %></td>
-			<td><%=SD.getSeibetsu() %></td>
-			<td>継続</td>
-			<td>在学</td>
+			<%String Sei = SD.getSeibetsu();
+			  if(Sei.equals("F")){ %>
+			  	<td>女</td>
+			<% }else if(Sei.equals("M")){%>
+				 <td>男</td>
+			<% }else if(Sei.equals("X")){%>
+				 <td>未</td>
+			 <%} %>		
+			 <%
+			   int zai = SD.getZaisekiJokyo();
+			   if(zai == 1){%>
+			 	<td>在学</td>
+			 <% }else if(zai ==2){ %>
+			 	<td>卒業</td>
+			 <% }else if(zai ==3){ %>
+			 	<td>退学</td>
+			 <% }else if(zai ==4){ %>
+				<td>留年</td>
+			<%}%>
+			<td>辞退</td>
 			<td><%=SD.getKenNaiGaiKibo() %></td>
-			<td>SE</td>
-			<td>PG</td>
-			<td>-</td>
+			<%
+			  List<StudentChukan> chukanList = SD.getGakuseiChukanList();
+			    for (int i = 0; i <= 2; i++) { 
+			        if (chukanList != null && i < chukanList.size()) {
+			        	%>
+			        	        <td><%= chukanList.get(i).getKibouShokushu() %></td>
+			        	<%
+			        	        } else {
+			        	%>
+			        	        <td>-</td>
+			        	   <%} %>
+			<%} %>
 			<td><%=SD.getBiko() %></td>
-			<td><button class="more-btn" data-row="1001">&hellip;</button></td>
+			<td><button class="more-btn" data-row=<%=SD.getGakusekiNo() %>>&hellip;</button></td>
 		</tr>
 		<%} %>
 	</table>
